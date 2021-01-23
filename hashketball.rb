@@ -1,4 +1,6 @@
 # Write your code below game_hash
+require 'pry'
+
 def game_hash
   {
     home: {
@@ -126,4 +128,123 @@ def game_hash
   }
 end
 
-# Write code here
+
+def player_list
+    players = game_hash[:home][:players] + game_hash[:away][:players]
+end
+
+# * Build a method, `num_points_scored` that takes in an argument of a player's
+#   name and returns the number of points scored for that player.
+
+
+def num_points_scored(name)
+  player_list.each { | player |
+    return player[:points] if player[:player_name] == name
+  }
+end
+
+# * Build a method, `shoe_size`, that takes in an argument of a player's name and
+#   returns the shoe size for that player.
+
+def shoe_size(name)
+  player_list.each {|player|
+    return player[:shoe] if player[:player_name] == name}
+end
+  
+  
+def team_colors(team)
+  game_hash.each { |each_team|
+    return each_team[1][:colors].to_a if each_team[1][:team_name] == team
+  }
+end
+
+# Build a method, `team_names`, that operates on the game `Hash` to return an
+#   `Array` of the team names.
+  
+def team_names
+  team_array = []
+  game_hash.each { |each_team|
+    team_array << each_team[1][:team_name]
+  }
+  team_array
+end  
+  
+  # * Build a method, `player_numbers`, that takes in an argument of a team name and
+  # returns an `Array` of the jersey numbers for that team.
+
+def player_numbers(team)
+  game_hash.each { |name, attributes|
+      return attributes[:players].map { |key|
+        key[:number]
+      } if attributes[:team_name] == team
+  }
+end
+
+# * Build a method, `player_stats`, that takes in an argument of a player's name
+#   and returns a hash of that player's stats.
+
+def player_stats(name)
+  player_list.map do |player|
+    return player if player[:player_name] == name
+  end
+end  
+
+# * Build a method, `big_shoe_rebounds`, that will return the number of rebounds
+#   associated with the player that has the largest shoe size. Break this one down
+#   into steps:
+
+#   * First, find the player with the largest shoe size
+#   * Then, return that player's number of rebounds
+#   * Remember to think about return values here.
+
+def big_shoe_rebounds
+  shoe_size = 0
+  rebounds = 0
+  player_list.each do |player|
+    if player[:shoe] > shoe_size
+    #binding.pry
+      shoe_size = player[:shoe]
+      rebounds = player[:rebounds]
+    end
+  end
+  rebounds
+end  
+
+# 1. Which player has the most points? Call the method `most_points_scored`.
+
+def most_points_scored
+  highest_scoring_player = ""
+  most_points = 0
+  player_list.each do |player|
+    if player[:points] > most_points
+      most_points = player[:points]
+      highest_scoring_player = player[:player_name]
+    end
+  end  
+  highest_scoring_player
+end  
+
+# 2. Which team has the most points? Call the method `winning_team`.
+
+def winning_team
+  #take each player's points and add them together for that team
+  game_hash.each { |each_team|
+    return each_team[1][:players][:points].to_a
+  }
+
+end
+
+
+def winning_team_1
+  point_array = []
+  game_hash.each { |each_team|
+    point_array << each_team[1][:players][:points]
+  }
+  poi_array
+end
+
+
+
+
+
+# binding.pry
