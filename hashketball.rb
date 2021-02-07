@@ -129,22 +129,6 @@ def game_hash
 end
 
 
-def player_list
-    players = game_hash[:home][:players] + game_hash[:away][:players]
-end
-
-# * Build a method, `num_points_scored` that takes in an argument of a player's
-#   name and returns the number of points scored for that player.
-
-
-def num_points_scored(name)
-  player_list.each { | player |
-    return player[:points] if player[:player_name] == name
-  }
-end
-
-# * Build a method, `shoe_size`, that takes in an argument of a player's name and
-#   returns the shoe size for that player.
 
 def shoe_size(name)
   player_list.each {|player|
@@ -240,11 +224,26 @@ def winning_team_1
   game_hash.each { |each_team|
     point_array << each_team[1][:players][:points]
   }
-  poi_array
+  point_array
 end
 
 
 
 
 
-# binding.pry
+# binding.prydef player_list
+    players = game_hash[:home][:players] + game_hash[:away][:players]
+end
+
+# * Build a method, `num_points_scored` that takes in an argument of a player's
+#   name and returns the number of points scored for that player.
+
+
+def num_points_scored(name)
+  player_list.each { | player |
+    return player[:points] if player[:player_name] == name
+  }
+end
+
+# * Build a method, `shoe_size`, that takes in an argument of a player's name and
+#   returns the shoe size for that player.
